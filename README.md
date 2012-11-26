@@ -1,4 +1,8 @@
-hamcrest-bacon
-==============
+Hamcrest Bacon
+=============
 
-Small Java library of additional matchers, etc. to aid in testing.
+The delicious add-on for Hamcrest
+-------------
+
+Bacon is a collection of additions for Hamcrest geared towards increasing readability and ease of use.
+
