@@ -1,16 +1,21 @@
-package com.developmentsprint.matchers;
+package org.hamcrest.bacon.matchers;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
-public class That<T> extends BaseMatcher<T> {
+public class ContainsMatcher<T> extends BaseMatcher<T> {
 
     private final Matcher<T> matcher;
 
-    public That(Matcher<T> matcher) {
+    private ContainsMatcher(Matcher<T> matcher) {
         this.matcher = matcher;
+    }
+
+    @Factory
+    public static <T> Matcher<T> contains(Matcher<T> matcher) {
+        return new ContainsMatcher<T>(matcher);
     }
 
     @Override
@@ -20,7 +25,7 @@ public class That<T> extends BaseMatcher<T> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("that ").appendDescriptionOf(matcher);
+        description.appendText("contains ").appendDescriptionOf(matcher);
     }
 
     @Override
@@ -28,8 +33,4 @@ public class That<T> extends BaseMatcher<T> {
         matcher.describeMismatch(item, mismatchDescription);
     }
 
-    @Factory
-    public static <T> Matcher<T> that(Matcher<T> matcher) {
-        return new That<T>(matcher);
-    }
 }

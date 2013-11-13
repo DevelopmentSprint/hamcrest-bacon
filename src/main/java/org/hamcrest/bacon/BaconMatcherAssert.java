@@ -1,4 +1,4 @@
-package com.developmentsprint;
+package org.hamcrest.bacon;
 
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
@@ -9,8 +9,7 @@ public class BaconMatcherAssert extends MatcherAssert {
         MatcherAssert.assertThat("", actual, matcher);
     }
 
-    public static <T> void assertThatWith(String reason, T actual,
-            Matcher<? super T> matcher) {
+    public static <T> void assertThatWith(String reason, T actual, Matcher<? super T> matcher) {
         MatcherAssert.assertThat(reason, actual, matcher);
     }
 
