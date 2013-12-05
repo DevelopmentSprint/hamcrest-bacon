@@ -3,13 +3,11 @@ package org.hamcrest.bacon;
 import static org.hamcrest.Matchers.anything;
 
 import org.hamcrest.Matcher;
-import org.hamcrest.bacon.matchers.ContainsMatcher;
-import org.hamcrest.bacon.matchers.HasMatcher;
-import org.hamcrest.bacon.matchers.FieldMatcher;
-import org.hamcrest.bacon.matchers.RegexMatcher;
 import org.hamcrest.bacon.matchers.ContainsAllMatcher;
-import org.hamcrest.bacon.matchers.ThatMatcher;
-import org.hamcrest.core.CombinableMatcher;
+import org.hamcrest.bacon.matchers.ContainsMatcher;
+import org.hamcrest.bacon.matchers.FieldMatcher;
+import org.hamcrest.bacon.matchers.NoopMatcher;
+import org.hamcrest.bacon.matchers.RegexMatcher;
 
 public final class Matchers {
 
@@ -17,12 +15,16 @@ public final class Matchers {
         // prevent instantiation
     }
 
-    public static <T> Matcher<T> has(CombinableMatcher<T> matcher) {
-        return HasMatcher.has(matcher);
+    public static <T> Matcher<T> has(Matcher<T> matcher) {
+        return NoopMatcher.noop(matcher, "has");
+    }
+
+    public static <T> Matcher<T> a(Matcher<T> matcher) {
+        return NoopMatcher.noop(matcher, "a");
     }
 
     public static <T> Matcher<T> that(Matcher<T> matcher) {
-        return ThatMatcher.that(matcher);
+        return NoopMatcher.noop(matcher, "that");
     }
 
     public static <T> Matcher<T> property(String s) {
@@ -53,7 +55,7 @@ public final class Matchers {
         return ContainsAllMatcher.containsAllStrings(s);
     }
 
-    public static <T> Matcher<T> matches(String... regexArray) {
+    public static <T> Matcher<T> matchesRegex(String... regexArray) {
         return RegexMatcher.matches(regexArray);
     }
 
